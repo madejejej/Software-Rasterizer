@@ -16,3 +16,9 @@
 *.exe
 *.out
 *.app
+
+# git swap files
+*.swp
+
+# build dir
+/build/*
