@@ -1,0 +1,47 @@
+\hypertarget{screen_8c}{\section{Dokumentacja pliku src/screen.c}
+\label{screen_8c}\index{src/screen.\-c@{src/screen.\-c}}
+}
+{\ttfamily \#include $<$allegro5/allegro.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}screen.\-h\char`\"{}}\\*
+\subsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{screen_8c_aa3c4af2475541faf08f48e3f07f1d923}{screen\-\_\-init} (\hyperlink{screen_8h_afa61cd3c6c3d8fda39f72e9533446621}{screen\-\_\-t} $\ast$$\ast$screen, int width, int height)
+\begin{DoxyCompactList}\small\item\em Inicjalizacja ekranu. \end{DoxyCompactList}\item 
+void \hyperlink{screen_8c_ae30f9705c2f8a1907908d6be4c254f29}{screen\-\_\-update} (\hyperlink{screen_8h_afa61cd3c6c3d8fda39f72e9533446621}{screen\-\_\-t} $\ast$screen, \hyperlink{structbitmap__t}{bitmap\-\_\-t} $\ast$bmp)
+\begin{DoxyCompactList}\small\item\em Rysowanie bitmapy na ekranie Bitmapa zawsze bedzie rysowana zaczynajac od lewego gornego rogu ekranu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Dokumentacja funkcji}
+\hypertarget{screen_8c_aa3c4af2475541faf08f48e3f07f1d923}{\index{screen.\-c@{screen.\-c}!screen\-\_\-init@{screen\-\_\-init}}
+\index{screen\-\_\-init@{screen\-\_\-init}!screen.c@{screen.\-c}}
+\subsubsection[{screen\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void screen\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{{\bf screen\-\_\-t} $\ast$$\ast$}]{screen, }
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)}}\label{screen_8c_aa3c4af2475541faf08f48e3f07f1d923}
+
+
+Inicjalizacja ekranu. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em width} & -\/ szerokosc ekranu \\
+\hline
+{\em height} & -\/ wysokosc ekranu \\
+\hline
+\end{DoxyParams}
+\hypertarget{screen_8c_ae30f9705c2f8a1907908d6be4c254f29}{\index{screen.\-c@{screen.\-c}!screen\-\_\-update@{screen\-\_\-update}}
+\index{screen\-\_\-update@{screen\-\_\-update}!screen.c@{screen.\-c}}
+\subsubsection[{screen\-\_\-update}]{\setlength{\rightskip}{0pt plus 5cm}void screen\-\_\-update (
+\begin{DoxyParamCaption}
+\item[{{\bf screen\-\_\-t} $\ast$}]{screen, }
+\item[{{\bf bitmap\-\_\-t} $\ast$}]{bmp}
+\end{DoxyParamCaption}
+)}}\label{screen_8c_ae30f9705c2f8a1907908d6be4c254f29}
+
+
+Rysowanie bitmapy na ekranie Bitmapa zawsze bedzie rysowana zaczynajac od lewego gornego rogu ekranu. 
+

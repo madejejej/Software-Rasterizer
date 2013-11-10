@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
+<title>Software Rasterizer: Dokumentacja pliku src/rasterizer/rasterizer.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Software Rasterizer
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">Budowa i rasteryzacja scen 3D gotowa do oblsugi mikrokontrolerow</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.8.5 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Strona&#160;główna</span></a></li>
+      <li><a href="annotated.html"><span>Struktury&#160;Danych</span></a></li>
+      <li class="current"><a href="files.html"><span>Pliki</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Szukaj" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;plików</span></a></li>
+      <li><a href="globals.html"><span>Globalne</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('rasterizer_8c.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Struktury Danych</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Pliki</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funkcje</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Zmienne</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definicje typów</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Definicje</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Definicje</a> &#124;
+<a href="#func-members">Funkcje</a>  </div>
+  <div class="headertitle">
+<div class="title">Dokumentacja pliku rasterizer.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="rasterizer_8h_source.html">rasterizer.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="bitmap_8h_source.html">../bitmap.h</a>&quot;</code><br/>
+<code>#include &lt;math.h&gt;</code><br/>
+<code>#include &lt;stdio.h&gt;</code><br/>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Definicje</h2></td></tr>
+<tr class="memitem:a19d0a009f53483b3870a27cc0b5327e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a19d0a009f53483b3870a27cc0b5327e1">f01</a>(x, y)&#160;&#160;&#160;((y0-y1)*x + (x1-x0)*y + x0*y1 - x1*y0)</td></tr>
+<tr class="separator:a19d0a009f53483b3870a27cc0b5327e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ef3c2e2a331a2d2213d47a533c4b7da"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a9ef3c2e2a331a2d2213d47a533c4b7da">f12</a>(x, y)&#160;&#160;&#160;((y1-y2)*x + (x2-x1)*y + x1*y2 - x2*y1)</td></tr>
+<tr class="separator:a9ef3c2e2a331a2d2213d47a533c4b7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad812dfe043103c32547ba78cd85b6829"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#ad812dfe043103c32547ba78cd85b6829">f20</a>(x, y)&#160;&#160;&#160;((y2-y0)*x + (x0-x2)*y + x2*y0 - x0*y2)</td></tr>
+<tr class="separator:ad812dfe043103c32547ba78cd85b6829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8909cbe90e7ff279b48c636fb554c0a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a8909cbe90e7ff279b48c636fb554c0a6">RED</a>(x)&#160;&#160;&#160;((x &amp; 0xFF0000) &gt;&gt; 16)</td></tr>
+<tr class="separator:a8909cbe90e7ff279b48c636fb554c0a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a335dc405279df8fb09ad38f0dc7226ab"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a335dc405279df8fb09ad38f0dc7226ab">GREEN</a>(x)&#160;&#160;&#160;((x &amp; 0x00FF00) &gt;&gt; 8)</td></tr>
+<tr class="separator:a335dc405279df8fb09ad38f0dc7226ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a089ca3502f01d49c81bff86cfe218b40"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a089ca3502f01d49c81bff86cfe218b40">BLUE</a>(x)&#160;&#160;&#160;((x &amp; 0x0000FF))</td></tr>
+<tr class="separator:a089ca3502f01d49c81bff86cfe218b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9b07338a4ca3866e642928a6c91bf29"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#ac9b07338a4ca3866e642928a6c91bf29">CLAMP</a>(val, x, y)&#160;&#160;&#160;(val &lt; x ? x : (val &gt; y ? y : val))</td></tr>
+<tr class="separator:ac9b07338a4ca3866e642928a6c91bf29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:a51ab1e9d9d574ff7de60f4f11e0a3849"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a51ab1e9d9d574ff7de60f4f11e0a3849">interp_colors</a> (<a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a> c1, <a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a> c2, <a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a> c3, float a, float b, float c)</td></tr>
+<tr class="separator:a51ab1e9d9d574ff7de60f4f11e0a3849"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc8d31f8d9069fc51aafe4320dabf6d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#adc8d31f8d9069fc51aafe4320dabf6d4">rasterize</a> (<a class="el" href="structbitmap__t.html">bitmap_t</a> *bmp, <a class="el" href="structtriangle2d__t.html">triangle2d_t</a> *triangles, int n)</td></tr>
+<tr class="memdesc:adc8d31f8d9069fc51aafe4320dabf6d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rasteryzacja trojkatow.  <a href="#adc8d31f8d9069fc51aafe4320dabf6d4">Więcej...</a><br/></td></tr>
+<tr class="separator:adc8d31f8d9069fc51aafe4320dabf6d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Dokumentacja definicji</h2>
+<a class="anchor" id="a089ca3502f01d49c81bff86cfe218b40"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLUE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;((x &amp; 0x0000FF))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac9b07338a4ca3866e642928a6c91bf29"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CLAMP</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">val, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">y&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(val &lt; x ? x : (val &gt; y ? y : val))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a19d0a009f53483b3870a27cc0b5327e1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define f01</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">y&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((y0-y1)*x + (x1-x0)*y + x0*y1 - x1*y0)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9ef3c2e2a331a2d2213d47a533c4b7da"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define f12</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">y&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((y1-y2)*x + (x2-x1)*y + x1*y2 - x2*y1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad812dfe043103c32547ba78cd85b6829"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define f20</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">y&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((y2-y0)*x + (x0-x2)*y + x2*y0 - x0*y2)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a335dc405279df8fb09ad38f0dc7226ab"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GREEN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;((x &amp; 0x00FF00) &gt;&gt; 8)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8909cbe90e7ff279b48c636fb554c0a6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RED</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;((x &amp; 0xFF0000) &gt;&gt; 16)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentacja funkcji</h2>
+<a class="anchor" id="a51ab1e9d9d574ff7de60f4f11e0a3849"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a> interp_colors </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a>&#160;</td>
+          <td class="paramname"><em>c1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a>&#160;</td>
+          <td class="paramname"><em>c2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a>&#160;</td>
+          <td class="paramname"><em>c3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adc8d31f8d9069fc51aafe4320dabf6d4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rasterize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbitmap__t.html">bitmap_t</a> *&#160;</td>
+          <td class="paramname"><em>bmp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structtriangle2d__t.html">triangle2d_t</a> *&#160;</td>
+          <td class="paramname"><em>triangles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rasteryzacja trojkatow. </p>
+<p>Funkcja sluzaca do rasteryzacji </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bmp</td><td>- bitmapa na ktorej zrasteryzowane zostana trojkaty </td></tr>
+    <tr><td class="paramname">triangles</td><td>- tablica trojkatow </td></tr>
+    <tr><td class="paramname">n</td><td>- liczba trojkatow </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d129b4f084233a1582573e2379e384b6.html">rasterizer</a></li><li class="navelem"><a class="el" href="rasterizer_8c.html">rasterizer.c</a></li>
+    <li class="footer">Wygenerowano N, 10 lis 2013 15:04:02 dla Software Rasterizer programem
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
+  </ul>
+</div>
+</body>
+</html>

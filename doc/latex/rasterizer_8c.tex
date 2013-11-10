@@ -1,0 +1,125 @@
+\hypertarget{rasterizer_8c}{\section{Dokumentacja pliku src/rasterizer/rasterizer.c}
+\label{rasterizer_8c}\index{src/rasterizer/rasterizer.\-c@{src/rasterizer/rasterizer.\-c}}
+}
+{\ttfamily \#include \char`\"{}rasterizer.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../bitmap.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$math.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+\subsection*{Definicje}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{rasterizer_8c_a19d0a009f53483b3870a27cc0b5327e1}{f01}(x, y)~((y0-\/y1)$\ast$x + (x1-\/x0)$\ast$y + x0$\ast$y1 -\/ x1$\ast$y0)
+\item 
+\#define \hyperlink{rasterizer_8c_a9ef3c2e2a331a2d2213d47a533c4b7da}{f12}(x, y)~((y1-\/y2)$\ast$x + (x2-\/x1)$\ast$y + x1$\ast$y2 -\/ x2$\ast$y1)
+\item 
+\#define \hyperlink{rasterizer_8c_ad812dfe043103c32547ba78cd85b6829}{f20}(x, y)~((y2-\/y0)$\ast$x + (x0-\/x2)$\ast$y + x2$\ast$y0 -\/ x0$\ast$y2)
+\item 
+\#define \hyperlink{rasterizer_8c_a8909cbe90e7ff279b48c636fb554c0a6}{R\-E\-D}(x)~((x \& 0x\-F\-F0000) $>$$>$ 16)
+\item 
+\#define \hyperlink{rasterizer_8c_a335dc405279df8fb09ad38f0dc7226ab}{G\-R\-E\-E\-N}(x)~((x \& 0x00\-F\-F00) $>$$>$ 8)
+\item 
+\#define \hyperlink{rasterizer_8c_a089ca3502f01d49c81bff86cfe218b40}{B\-L\-U\-E}(x)~((x \& 0x0000\-F\-F))
+\item 
+\#define \hyperlink{rasterizer_8c_ac9b07338a4ca3866e642928a6c91bf29}{C\-L\-A\-M\-P}(val, x, y)~(val $<$ x ? x \-: (val $>$ y ? y \-: val))
+\end{DoxyCompactItemize}
+\subsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_af00bd69e44901f206becdb8e7cf0ff27}{color\-\_\-t} \hyperlink{rasterizer_8c_a51ab1e9d9d574ff7de60f4f11e0a3849}{interp\-\_\-colors} (\hyperlink{types_8h_af00bd69e44901f206becdb8e7cf0ff27}{color\-\_\-t} c1, \hyperlink{types_8h_af00bd69e44901f206becdb8e7cf0ff27}{color\-\_\-t} c2, \hyperlink{types_8h_af00bd69e44901f206becdb8e7cf0ff27}{color\-\_\-t} c3, float a, float b, float c)
+\item 
+void \hyperlink{rasterizer_8c_adc8d31f8d9069fc51aafe4320dabf6d4}{rasterize} (\hyperlink{structbitmap__t}{bitmap\-\_\-t} $\ast$bmp, \hyperlink{structtriangle2d__t}{triangle2d\-\_\-t} $\ast$triangles, int n)
+\begin{DoxyCompactList}\small\item\em Rasteryzacja trojkatow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Dokumentacja definicji}
+\hypertarget{rasterizer_8c_a089ca3502f01d49c81bff86cfe218b40}{\index{rasterizer.\-c@{rasterizer.\-c}!B\-L\-U\-E@{B\-L\-U\-E}}
+\index{B\-L\-U\-E@{B\-L\-U\-E}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{B\-L\-U\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\-L\-U\-E(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~((x \& 0x0000\-F\-F))}}\label{rasterizer_8c_a089ca3502f01d49c81bff86cfe218b40}
+\hypertarget{rasterizer_8c_ac9b07338a4ca3866e642928a6c91bf29}{\index{rasterizer.\-c@{rasterizer.\-c}!C\-L\-A\-M\-P@{C\-L\-A\-M\-P}}
+\index{C\-L\-A\-M\-P@{C\-L\-A\-M\-P}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{C\-L\-A\-M\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-L\-A\-M\-P(
+\begin{DoxyParamCaption}
+\item[{}]{val, }
+\item[{}]{x, }
+\item[{}]{y}
+\end{DoxyParamCaption}
+)~(val $<$ x ? x \-: (val $>$ y ? y \-: val))}}\label{rasterizer_8c_ac9b07338a4ca3866e642928a6c91bf29}
+\hypertarget{rasterizer_8c_a19d0a009f53483b3870a27cc0b5327e1}{\index{rasterizer.\-c@{rasterizer.\-c}!f01@{f01}}
+\index{f01@{f01}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{f01}]{\setlength{\rightskip}{0pt plus 5cm}\#define f01(
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{y}
+\end{DoxyParamCaption}
+)~((y0-\/y1)$\ast$x + (x1-\/x0)$\ast$y + x0$\ast$y1 -\/ x1$\ast$y0)}}\label{rasterizer_8c_a19d0a009f53483b3870a27cc0b5327e1}
+\hypertarget{rasterizer_8c_a9ef3c2e2a331a2d2213d47a533c4b7da}{\index{rasterizer.\-c@{rasterizer.\-c}!f12@{f12}}
+\index{f12@{f12}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{f12}]{\setlength{\rightskip}{0pt plus 5cm}\#define f12(
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{y}
+\end{DoxyParamCaption}
+)~((y1-\/y2)$\ast$x + (x2-\/x1)$\ast$y + x1$\ast$y2 -\/ x2$\ast$y1)}}\label{rasterizer_8c_a9ef3c2e2a331a2d2213d47a533c4b7da}
+\hypertarget{rasterizer_8c_ad812dfe043103c32547ba78cd85b6829}{\index{rasterizer.\-c@{rasterizer.\-c}!f20@{f20}}
+\index{f20@{f20}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{f20}]{\setlength{\rightskip}{0pt plus 5cm}\#define f20(
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{y}
+\end{DoxyParamCaption}
+)~((y2-\/y0)$\ast$x + (x0-\/x2)$\ast$y + x2$\ast$y0 -\/ x0$\ast$y2)}}\label{rasterizer_8c_ad812dfe043103c32547ba78cd85b6829}
+\hypertarget{rasterizer_8c_a335dc405279df8fb09ad38f0dc7226ab}{\index{rasterizer.\-c@{rasterizer.\-c}!G\-R\-E\-E\-N@{G\-R\-E\-E\-N}}
+\index{G\-R\-E\-E\-N@{G\-R\-E\-E\-N}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{G\-R\-E\-E\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\-R\-E\-E\-N(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~((x \& 0x00\-F\-F00) $>$$>$ 8)}}\label{rasterizer_8c_a335dc405279df8fb09ad38f0dc7226ab}
+\hypertarget{rasterizer_8c_a8909cbe90e7ff279b48c636fb554c0a6}{\index{rasterizer.\-c@{rasterizer.\-c}!R\-E\-D@{R\-E\-D}}
+\index{R\-E\-D@{R\-E\-D}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{R\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-E\-D(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~((x \& 0x\-F\-F0000) $>$$>$ 16)}}\label{rasterizer_8c_a8909cbe90e7ff279b48c636fb554c0a6}
+
+
+\subsection{Dokumentacja funkcji}
+\hypertarget{rasterizer_8c_a51ab1e9d9d574ff7de60f4f11e0a3849}{\index{rasterizer.\-c@{rasterizer.\-c}!interp\-\_\-colors@{interp\-\_\-colors}}
+\index{interp\-\_\-colors@{interp\-\_\-colors}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{interp\-\_\-colors}]{\setlength{\rightskip}{0pt plus 5cm}{\bf color\-\_\-t} interp\-\_\-colors (
+\begin{DoxyParamCaption}
+\item[{{\bf color\-\_\-t}}]{c1, }
+\item[{{\bf color\-\_\-t}}]{c2, }
+\item[{{\bf color\-\_\-t}}]{c3, }
+\item[{float}]{a, }
+\item[{float}]{b, }
+\item[{float}]{c}
+\end{DoxyParamCaption}
+)}}\label{rasterizer_8c_a51ab1e9d9d574ff7de60f4f11e0a3849}
+\hypertarget{rasterizer_8c_adc8d31f8d9069fc51aafe4320dabf6d4}{\index{rasterizer.\-c@{rasterizer.\-c}!rasterize@{rasterize}}
+\index{rasterize@{rasterize}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{rasterize}]{\setlength{\rightskip}{0pt plus 5cm}void rasterize (
+\begin{DoxyParamCaption}
+\item[{{\bf bitmap\-\_\-t} $\ast$}]{bmp, }
+\item[{{\bf triangle2d\-\_\-t} $\ast$}]{triangles, }
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}}\label{rasterizer_8c_adc8d31f8d9069fc51aafe4320dabf6d4}
+
+
+Rasteryzacja trojkatow. 
+
+Funkcja sluzaca do rasteryzacji 
+\begin{DoxyParams}{Parametry}
+{\em bmp} & -\/ bitmapa na ktorej zrasteryzowane zostana trojkaty \\
+\hline
+{\em triangles} & -\/ tablica trojkatow \\
+\hline
+{\em n} & -\/ liczba trojkatow \\
+\hline
+\end{DoxyParams}
