@@ -4,6 +4,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "bitmap.c", "bitmap_8c.html", "bitmap_8c" ],
     [ "bitmap.h", "bitmap_8h.html", "bitmap_8h" ],
     [ "main.c", "main_8c.html", "main_8c" ],
+    [ "main_page_doc.h", "main__page__doc_8h.html", null ],
     [ "screen.c", "screen_8c.html", "screen_8c" ],
     [ "screen.h", "screen_8h.html", "screen_8h" ],
     [ "types.c", "types_8c.html", "types_8c" ],

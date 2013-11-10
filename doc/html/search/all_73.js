@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['software_20rasterizer',['Software Rasterizer',['../index.html',1,'']]],
   ['screen_2ec',['screen.c',['../screen_8c.html',1,'']]],
   ['screen_2eh',['screen.h',['../screen_8h.html',1,'']]],
   ['screen_5finit',['screen_init',['../screen_8c.html#aa3c4af2475541faf08f48e3f07f1d923',1,'screen_init(screen_t **screen, int width, int height):&#160;screen.c'],['../screen_8h.html#aa3c4af2475541faf08f48e3f07f1d923',1,'screen_init(screen_t **screen, int width, int height):&#160;screen.c']]],
