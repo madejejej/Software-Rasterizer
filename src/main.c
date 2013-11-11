@@ -20,9 +20,9 @@ int main(int argc, char **arv) {
     screen_update(display, &bmp);
 
   triangle2d_t tri = triangle2d_init( 
-      point2d_init(100, 100, 0xFF0000), 
-      point2d_init(500, 100, 0x00FF00), 
-      point2d_init(300, 500, 0x0000FF) );
+      point2d_init(100, 100, 10, 0xFF0000), 
+      point2d_init(500, 100, 100, 0x00FF00), 
+      point2d_init(300, 500, 5, 0x0000FF) );
 
   ALLEGRO_EVENT_QUEUE *event_queue = NULL;
   event_queue = al_create_event_queue();
@@ -39,6 +39,7 @@ int main(int argc, char **arv) {
   }
   al_destroy_display(display);
   al_destroy_event_queue(event_queue);
+  rasterizer_free_memory();
   free(bmp.data);
   return 0;
 }

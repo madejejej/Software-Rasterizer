@@ -1,8 +1,9 @@
 #include"types.h"
 
-point2d_t point2d_init(float x, float y, color_t color) {
+point2d_t point2d_init(float x, float y, unsigned int depth, color_t color) {
   point2d_t p;
   p.x = x; p.y = y;
+  p.depth = depth;
   p.color = color;
   return p;
 }

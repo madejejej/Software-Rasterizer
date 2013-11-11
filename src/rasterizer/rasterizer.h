@@ -13,4 +13,10 @@
  * @param n - liczba trojkatow
  */
 void rasterize(bitmap_t *bmp, triangle2d_t *triangles, int n);
+
+/**
+ * Funkcja czyszczaca zaalokowana pamiec
+ * aby zapobiec wyciekom pamieci musi byc wywolana przed zakonczeniem programu.
+ */
+void rasterizer_free_memory();
 #endif

@@ -29,6 +29,7 @@ typedef struct {
  */
 typedef struct {
   float x,y;
+  unsigned int depth;
   color_t color;
 } point2d_t;
 
@@ -43,7 +44,7 @@ typedef struct {
 /**
  * Tworzy nowy point2d_t
  */
-point2d_t point2d_init(float x, float y, color_t color);
+point2d_t point2d_init(float x, float y, unsigned int depth, color_t color);
 
 /**
  * Tworzy nowy triangle2d_t z trzech punktow

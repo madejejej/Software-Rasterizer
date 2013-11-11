@@ -1,5 +1,7 @@
 #include"rasterizer.h"
 #include"../bitmap.h"
+#include<limits.h>
+#include<stdlib.h>
 #include<math.h>
 #include<stdio.h>
 
@@ -13,8 +15,32 @@
 
 color_t interp_colors(color_t c1, color_t c2, color_t c3, float a, float b, float c); 
 
+unsigned int interp_uint(unsigned int x, unsigned int y, unsigned int z, float a, float b, float c); 
+ 
+unsigned int *depth_buffer = NULL;
+int depth_buffer_size;
+
+void init_depth_buffer(int width, int height) {
+  depth_buffer_size = width*height;
+  depth_buffer = (unsigned int*)malloc(depth_buffer_size*sizeof(unsigned int));
+}
+
+void clear_depth_buffer() {
+  for(int i=0;i<depth_buffer_size; i++) {
+    depth_buffer[i] = INT_MAX;
+  }
+}
+
+void destroy_depth_buffer() {
+  free(depth_buffer);
+  depth_buffer = NULL;
+}
 
 void rasterize(bitmap_t *bmp, triangle2d_t *triangles, int n) {
+  if(!depth_buffer) {
+    init_depth_buffer(bmp->w, bmp->h);
+  }
+  clear_depth_buffer();
   for(int i=0; i<n; i++) {
     triangle2d_t tri = triangles[i];
 
@@ -37,7 +63,12 @@ void rasterize(bitmap_t *bmp, triangle2d_t *triangles, int n) {
         float gamma = f01(x,y)/f_gamma;
 
         if(alpha > 0 && beta > 0 && gamma > 0) {
-          //color_t col = alpha * tri.v1.color + beta*tri.v2.color + gamma*tri.v3.color;
+          unsigned int depth_value = interp_uint(tri.v1.depth,
+              tri.v2.depth, tri.v3.depth, alpha, beta, gamma);
+          if(depth_value > depth_buffer[y*bmp->w + x]) {
+            continue;
+          }
+          depth_buffer[y*bmp->w + x] = depth_value;
           color_t col = interp_colors(tri.v1.color, tri.v2.color, tri.v3.color, alpha, beta, gamma);
           put_pixel(bmp, x, y, col);
         }
@@ -55,3 +86,12 @@ color_t interp_colors(color_t c1, color_t c2, color_t c3, float a, float b, floa
   return interp;
 
 }
+
+unsigned int interp_uint(unsigned int x, unsigned int y, unsigned int z, float a, float b, float c) {
+  return a*x + b*y + c*z;
+}
+  
+void rasterizer_free_memory() {
+  destroy_depth_buffer();
+}
+
