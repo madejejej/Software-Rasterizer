@@ -104,13 +104,16 @@ $(document).ready(function(){initNavTree('rasterizer_8c.html','');});
 <div class="header">
   <div class="summary">
 <a href="#define-members">Definicje</a> &#124;
-<a href="#func-members">Funkcje</a>  </div>
+<a href="#func-members">Funkcje</a> &#124;
+<a href="#var-members">Zmienne</a>  </div>
   <div class="headertitle">
 <div class="title">Dokumentacja pliku rasterizer.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="rasterizer_8h_source.html">rasterizer.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="bitmap_8h_source.html">../bitmap.h</a>&quot;</code><br/>
+<code>#include &lt;limits.h&gt;</code><br/>
+<code>#include &lt;stdlib.h&gt;</code><br/>
 <code>#include &lt;math.h&gt;</code><br/>
 <code>#include &lt;stdio.h&gt;</code><br/>
 </div><table class="memberdecls">
@@ -135,9 +138,27 @@ Definicje</h2></td></tr>
 Funkcje</h2></td></tr>
 <tr class="memitem:a51ab1e9d9d574ff7de60f4f11e0a3849"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a51ab1e9d9d574ff7de60f4f11e0a3849">interp_colors</a> (<a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a> c1, <a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a> c2, <a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a> c3, float a, float b, float c)</td></tr>
 <tr class="separator:a51ab1e9d9d574ff7de60f4f11e0a3849"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79ed9a060a255cde205ccbe8ae0635a1"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a79ed9a060a255cde205ccbe8ae0635a1">interp_uint</a> (unsigned int x, unsigned int y, unsigned int z, float a, float b, float c)</td></tr>
+<tr class="separator:a79ed9a060a255cde205ccbe8ae0635a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f279b4beb9b679538abab56377c4948"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a6f279b4beb9b679538abab56377c4948">init_depth_buffer</a> (int width, int height)</td></tr>
+<tr class="separator:a6f279b4beb9b679538abab56377c4948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9813698d3f97025bc27c71c37ff18a57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a9813698d3f97025bc27c71c37ff18a57">clear_depth_buffer</a> ()</td></tr>
+<tr class="separator:a9813698d3f97025bc27c71c37ff18a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71e423bc358af6e71f9de8f03eb31b39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a71e423bc358af6e71f9de8f03eb31b39">destroy_depth_buffer</a> ()</td></tr>
+<tr class="separator:a71e423bc358af6e71f9de8f03eb31b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc8d31f8d9069fc51aafe4320dabf6d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#adc8d31f8d9069fc51aafe4320dabf6d4">rasterize</a> (<a class="el" href="structbitmap__t.html">bitmap_t</a> *bmp, <a class="el" href="structtriangle2d__t.html">triangle2d_t</a> *triangles, int n)</td></tr>
 <tr class="memdesc:adc8d31f8d9069fc51aafe4320dabf6d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rasteryzacja trojkatow.  <a href="#adc8d31f8d9069fc51aafe4320dabf6d4">Więcej...</a><br/></td></tr>
 <tr class="separator:adc8d31f8d9069fc51aafe4320dabf6d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf34379690e59cebe2476716e81fbb44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#adf34379690e59cebe2476716e81fbb44">rasterizer_free_memory</a> ()</td></tr>
+<tr class="memdesc:adf34379690e59cebe2476716e81fbb44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja czyszczaca zaalokowana pamiec aby zapobiec wyciekom pamieci musi byc wywolana przed zakonczeniem programu.  <a href="#adf34379690e59cebe2476716e81fbb44">Więcej...</a><br/></td></tr>
+<tr class="separator:adf34379690e59cebe2476716e81fbb44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Zmienne</h2></td></tr>
+<tr class="memitem:a244eb912a07be8789723864db2acb96c"><td class="memItemLeft" align="right" valign="top">unsigned int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a244eb912a07be8789723864db2acb96c">depth_buffer</a> = NULL</td></tr>
+<tr class="separator:a244eb912a07be8789723864db2acb96c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39949c4363d4a7e4171f49488b43d50f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rasterizer_8c.html#a39949c4363d4a7e4171f49488b43d50f">depth_buffer_size</a></td></tr>
+<tr class="separator:a39949c4363d4a7e4171f49488b43d50f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Dokumentacja definicji</h2>
 <a class="anchor" id="a089ca3502f01d49c81bff86cfe218b40"></a>
@@ -299,6 +320,62 @@ Funkcje</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Dokumentacja funkcji</h2>
+<a class="anchor" id="a9813698d3f97025bc27c71c37ff18a57"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clear_depth_buffer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a71e423bc358af6e71f9de8f03eb31b39"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void destroy_depth_buffer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6f279b4beb9b679538abab56377c4948"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_depth_buffer </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a51ab1e9d9d574ff7de60f4f11e0a3849"></a>
 <div class="memitem">
 <div class="memproto">
@@ -320,6 +397,56 @@ Funkcje</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="types_8h.html#af00bd69e44901f206becdb8e7cf0ff27">color_t</a>&#160;</td>
           <td class="paramname"><em>c3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a79ed9a060a255cde205ccbe8ae0635a1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int interp_uint </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>z</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -392,13 +519,55 @@ Funkcje</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="adf34379690e59cebe2476716e81fbb44"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rasterizer_free_memory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funkcja czyszczaca zaalokowana pamiec aby zapobiec wyciekom pamieci musi byc wywolana przed zakonczeniem programu. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentacja zmiennych</h2>
+<a class="anchor" id="a244eb912a07be8789723864db2acb96c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int* depth_buffer = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a39949c4363d4a7e4171f49488b43d50f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int depth_buffer_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_d129b4f084233a1582573e2379e384b6.html">rasterizer</a></li><li class="navelem"><a class="el" href="rasterizer_8c.html">rasterizer.c</a></li>
-    <li class="footer">Wygenerowano N, 10 lis 2013 15:14:26 dla Software Rasterizer programem
+    <li class="footer">Wygenerowano Pn, 11 lis 2013 15:58:58 dla Software Rasterizer programem
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

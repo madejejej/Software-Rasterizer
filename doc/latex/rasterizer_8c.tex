@@ -3,6 +3,8 @@
 }
 {\ttfamily \#include \char`\"{}rasterizer.\-h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}../bitmap.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$limits.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
 {\ttfamily \#include $<$math.\-h$>$}\\*
 {\ttfamily \#include $<$stdio.\-h$>$}\\*
 \subsection*{Definicje}
@@ -27,8 +29,25 @@
 \item 
 \hyperlink{types_8h_af00bd69e44901f206becdb8e7cf0ff27}{color\-\_\-t} \hyperlink{rasterizer_8c_a51ab1e9d9d574ff7de60f4f11e0a3849}{interp\-\_\-colors} (\hyperlink{types_8h_af00bd69e44901f206becdb8e7cf0ff27}{color\-\_\-t} c1, \hyperlink{types_8h_af00bd69e44901f206becdb8e7cf0ff27}{color\-\_\-t} c2, \hyperlink{types_8h_af00bd69e44901f206becdb8e7cf0ff27}{color\-\_\-t} c3, float a, float b, float c)
 \item 
+unsigned int \hyperlink{rasterizer_8c_a79ed9a060a255cde205ccbe8ae0635a1}{interp\-\_\-uint} (unsigned int x, unsigned int y, unsigned int z, float a, float b, float c)
+\item 
+void \hyperlink{rasterizer_8c_a6f279b4beb9b679538abab56377c4948}{init\-\_\-depth\-\_\-buffer} (int width, int height)
+\item 
+void \hyperlink{rasterizer_8c_a9813698d3f97025bc27c71c37ff18a57}{clear\-\_\-depth\-\_\-buffer} ()
+\item 
+void \hyperlink{rasterizer_8c_a71e423bc358af6e71f9de8f03eb31b39}{destroy\-\_\-depth\-\_\-buffer} ()
+\item 
 void \hyperlink{rasterizer_8c_adc8d31f8d9069fc51aafe4320dabf6d4}{rasterize} (\hyperlink{structbitmap__t}{bitmap\-\_\-t} $\ast$bmp, \hyperlink{structtriangle2d__t}{triangle2d\-\_\-t} $\ast$triangles, int n)
-\begin{DoxyCompactList}\small\item\em Rasteryzacja trojkatow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Rasteryzacja trojkatow. \end{DoxyCompactList}\item 
+void \hyperlink{rasterizer_8c_adf34379690e59cebe2476716e81fbb44}{rasterizer\-\_\-free\-\_\-memory} ()
+\begin{DoxyCompactList}\small\item\em Funkcja czyszczaca zaalokowana pamiec aby zapobiec wyciekom pamieci musi byc wywolana przed zakonczeniem programu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Zmienne}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int $\ast$ \hyperlink{rasterizer_8c_a244eb912a07be8789723864db2acb96c}{depth\-\_\-buffer} = N\-U\-L\-L
+\item 
+int \hyperlink{rasterizer_8c_a39949c4363d4a7e4171f49488b43d50f}{depth\-\_\-buffer\-\_\-size}
+\end{DoxyCompactItemize}
 
 
 \subsection{Dokumentacja definicji}
@@ -89,6 +108,28 @@ void \hyperlink{rasterizer_8c_adc8d31f8d9069fc51aafe4320dabf6d4}{rasterize} (\hy
 
 
 \subsection{Dokumentacja funkcji}
+\hypertarget{rasterizer_8c_a9813698d3f97025bc27c71c37ff18a57}{\index{rasterizer.\-c@{rasterizer.\-c}!clear\-\_\-depth\-\_\-buffer@{clear\-\_\-depth\-\_\-buffer}}
+\index{clear\-\_\-depth\-\_\-buffer@{clear\-\_\-depth\-\_\-buffer}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{clear\-\_\-depth\-\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}void clear\-\_\-depth\-\_\-buffer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{rasterizer_8c_a9813698d3f97025bc27c71c37ff18a57}
+\hypertarget{rasterizer_8c_a71e423bc358af6e71f9de8f03eb31b39}{\index{rasterizer.\-c@{rasterizer.\-c}!destroy\-\_\-depth\-\_\-buffer@{destroy\-\_\-depth\-\_\-buffer}}
+\index{destroy\-\_\-depth\-\_\-buffer@{destroy\-\_\-depth\-\_\-buffer}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{destroy\-\_\-depth\-\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}void destroy\-\_\-depth\-\_\-buffer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{rasterizer_8c_a71e423bc358af6e71f9de8f03eb31b39}
+\hypertarget{rasterizer_8c_a6f279b4beb9b679538abab56377c4948}{\index{rasterizer.\-c@{rasterizer.\-c}!init\-\_\-depth\-\_\-buffer@{init\-\_\-depth\-\_\-buffer}}
+\index{init\-\_\-depth\-\_\-buffer@{init\-\_\-depth\-\_\-buffer}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{init\-\_\-depth\-\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}void init\-\_\-depth\-\_\-buffer (
+\begin{DoxyParamCaption}
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)}}\label{rasterizer_8c_a6f279b4beb9b679538abab56377c4948}
 \hypertarget{rasterizer_8c_a51ab1e9d9d574ff7de60f4f11e0a3849}{\index{rasterizer.\-c@{rasterizer.\-c}!interp\-\_\-colors@{interp\-\_\-colors}}
 \index{interp\-\_\-colors@{interp\-\_\-colors}!rasterizer.c@{rasterizer.\-c}}
 \subsubsection[{interp\-\_\-colors}]{\setlength{\rightskip}{0pt plus 5cm}{\bf color\-\_\-t} interp\-\_\-colors (
@@ -101,6 +142,18 @@ void \hyperlink{rasterizer_8c_adc8d31f8d9069fc51aafe4320dabf6d4}{rasterize} (\hy
 \item[{float}]{c}
 \end{DoxyParamCaption}
 )}}\label{rasterizer_8c_a51ab1e9d9d574ff7de60f4f11e0a3849}
+\hypertarget{rasterizer_8c_a79ed9a060a255cde205ccbe8ae0635a1}{\index{rasterizer.\-c@{rasterizer.\-c}!interp\-\_\-uint@{interp\-\_\-uint}}
+\index{interp\-\_\-uint@{interp\-\_\-uint}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{interp\-\_\-uint}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int interp\-\_\-uint (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{x, }
+\item[{unsigned int}]{y, }
+\item[{unsigned int}]{z, }
+\item[{float}]{a, }
+\item[{float}]{b, }
+\item[{float}]{c}
+\end{DoxyParamCaption}
+)}}\label{rasterizer_8c_a79ed9a060a255cde205ccbe8ae0635a1}
 \hypertarget{rasterizer_8c_adc8d31f8d9069fc51aafe4320dabf6d4}{\index{rasterizer.\-c@{rasterizer.\-c}!rasterize@{rasterize}}
 \index{rasterize@{rasterize}!rasterizer.c@{rasterizer.\-c}}
 \subsubsection[{rasterize}]{\setlength{\rightskip}{0pt plus 5cm}void rasterize (
@@ -123,3 +176,23 @@ Funkcja sluzaca do rasteryzacji
 {\em n} & -\/ liczba trojkatow \\
 \hline
 \end{DoxyParams}
+\hypertarget{rasterizer_8c_adf34379690e59cebe2476716e81fbb44}{\index{rasterizer.\-c@{rasterizer.\-c}!rasterizer\-\_\-free\-\_\-memory@{rasterizer\-\_\-free\-\_\-memory}}
+\index{rasterizer\-\_\-free\-\_\-memory@{rasterizer\-\_\-free\-\_\-memory}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{rasterizer\-\_\-free\-\_\-memory}]{\setlength{\rightskip}{0pt plus 5cm}void rasterizer\-\_\-free\-\_\-memory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{rasterizer_8c_adf34379690e59cebe2476716e81fbb44}
+
+
+Funkcja czyszczaca zaalokowana pamiec aby zapobiec wyciekom pamieci musi byc wywolana przed zakonczeniem programu. 
+
+
+
+\subsection{Dokumentacja zmiennych}
+\hypertarget{rasterizer_8c_a244eb912a07be8789723864db2acb96c}{\index{rasterizer.\-c@{rasterizer.\-c}!depth\-\_\-buffer@{depth\-\_\-buffer}}
+\index{depth\-\_\-buffer@{depth\-\_\-buffer}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{depth\-\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int$\ast$ depth\-\_\-buffer = N\-U\-L\-L}}\label{rasterizer_8c_a244eb912a07be8789723864db2acb96c}
+\hypertarget{rasterizer_8c_a39949c4363d4a7e4171f49488b43d50f}{\index{rasterizer.\-c@{rasterizer.\-c}!depth\-\_\-buffer\-\_\-size@{depth\-\_\-buffer\-\_\-size}}
+\index{depth\-\_\-buffer\-\_\-size@{depth\-\_\-buffer\-\_\-size}!rasterizer.c@{rasterizer.\-c}}
+\subsubsection[{depth\-\_\-buffer\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}int depth\-\_\-buffer\-\_\-size}}\label{rasterizer_8c_a39949c4363d4a7e4171f49488b43d50f}

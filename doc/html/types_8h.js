@@ -6,6 +6,6 @@ var types_8h =
     [ "point2d_t", "structpoint2d__t.html", "structpoint2d__t" ],
     [ "triangle2d_t", "structtriangle2d__t.html", "structtriangle2d__t" ],
     [ "color_t", "types_8h.html#af00bd69e44901f206becdb8e7cf0ff27", null ],
-    [ "point2d_init", "types_8h.html#a7774292735aeb9aa12fe41f1c512c04d", null ],
+    [ "point2d_init", "types_8h.html#ac2b306596b2c24ff06b69a75113f9850", null ],
     [ "triangle2d_init", "types_8h.html#a0fbf9adbe0bc17cb3370e11193f31c56", null ]
 ];
