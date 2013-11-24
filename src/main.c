@@ -13,10 +13,11 @@ int main(int argc, char **arv) {
   bmp.w = WIDTH;
   bmp.h = HEIGHT;
   bmp.data = (color_t*)malloc(bmp.w*bmp.h*sizeof(int));
-  for(int i=0; i<bmp.w*bmp.h; i++) {
+  int i;
+  for(i=0; i<bmp.w*bmp.h; i++) {
     bmp.data[i] = 0xFF0000;
   }
-  for(int i=0; i<5; i++)
+  for(i=0; i<5; i++)
     screen_update(display, &bmp);
 
   triangle2d_t tri = triangle2d_init( 

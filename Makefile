@@ -1,4 +1,4 @@
-LDFLAGS = -L/usr/local/lib -lallegro -lallegro_main 
+LDFLAGS = -L/usr/local/lib -lallegro -lallegro_main -lm
 IFLAGS = -I/usr/local/include
 SRC = src/%.c 
 _OBJS = main.o screen.o rasterizer.o bitmap.o types.o

@@ -1,5 +1,6 @@
 #include<allegro5/allegro.h>
 #include "screen.h"
+#include "stdio.h"
 
 void screen_init(screen_t **screen, int width, int height) {
   ALLEGRO_DISPLAY *display = NULL;
@@ -26,8 +27,9 @@ void screen_update(screen_t *screen, bitmap_t *bmp) {
 
   al_set_target_bitmap(backbuffer);
 
-  for(int y=0; y<bmp->h; y++) {
-    for(int x=0; x<bmp->w; x++) {
+  int x, y;
+  for(y=0; y<bmp->h; y++) {
+    for(x=0; x<bmp->w; x++) {
       ALLEGRO_COLOR color = al_map_rgb(
           (bmp->data[y*bmp->w + x] & 0xFF0000) >> 16, 
           (bmp->data[y*bmp->w + x] & 0x00FF00) >> 8, 

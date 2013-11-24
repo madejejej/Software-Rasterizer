@@ -26,7 +26,8 @@ void init_depth_buffer(int width, int height) {
 }
 
 void clear_depth_buffer() {
-  for(int i=0;i<depth_buffer_size; i++) {
+  int i;
+  for(i=0;i<depth_buffer_size; i++) {
     depth_buffer[i] = INT_MAX;
   }
 }
@@ -41,7 +42,8 @@ void rasterize(bitmap_t *bmp, triangle2d_t *triangles, int n) {
     init_depth_buffer(bmp->w, bmp->h);
   }
   clear_depth_buffer();
-  for(int i=0; i<n; i++) {
+  int i;
+  for(i=0; i<n; i++) {
     triangle2d_t tri = triangles[i];
 
     float x0 = tri.v1.x; float y0 = tri.v1.y;
@@ -55,9 +57,9 @@ void rasterize(bitmap_t *bmp, triangle2d_t *triangles, int n) {
     float f_beta = f20(x1,y1);
     float f_gamma = f01(x2,y2);
 
-
-    for(int y=ymin; y<=ymax; y++) {
-      for(int x=xmin; x<=xmax; x++) {
+    int x, y;
+    for(y=ymin; y<=ymax; y++) {
+      for(x=xmin; x<=xmax; x++) {
         float alpha = f12(x,y)/f_alpha;
         float beta = f20(x,y)/f_beta;
         float gamma = f01(x,y)/f_gamma;
