@@ -2,7 +2,7 @@
 #include "stdio.h"
 #include "viewTransformations.h"
 
-MAT* getViewportTransformation(double nx,double ny,double nz,double widthScreen, double heightScreen){
+MAT* getViewportTransformation(float nx,float ny,float nz,float widthScreen, float heightScreen){
     /*MAT* canVector = m_get(4,1);
     canVector->me[0][0] = xCanonical;
     canVector->me[0][1] = yCanonical;
@@ -24,7 +24,7 @@ MAT* getViewportTransformation(double nx,double ny,double nz,double widthScreen,
     return transMat;
 }
 
-MAT* getOrthographicProjection(double l,double r,double b,double t,double n,double f){
+MAT* getOrthographicProjection(float l,float r,float b,float t,float n,float f){
     MAT* transMat = m_get(4,4);
     m_zero(transMat);
     transMat->me[0][0] = 2/(r-l);
@@ -37,7 +37,7 @@ MAT* getOrthographicProjection(double l,double r,double b,double t,double n,doub
     return transMat;
 }
 
-MAT* getCameraProjection(MAT *obj,double xe,double ye,double ze){
+MAT* getCameraProjection(MAT *obj,float xe,float ye,float ze){
     MAT* tmp = mget(4,4);
     m_zero(tmp);
     tmp->me[0][0] = 1;
@@ -50,7 +50,7 @@ MAT* getCameraProjection(MAT *obj,double xe,double ye,double ze){
     return m_mlt(obj, tmp);
 }
 
-MAT* getPerspectiveProjection(double n, double r, double l, double t, double b, double f){
+MAT* getPerspectiveProjection(float n, float r, float l, float t, float b, float f){
     MAT* transMat = mget(4,4);
     m_zero(tmp);
     transMat->me[0][0] = 2*n/(r-l);

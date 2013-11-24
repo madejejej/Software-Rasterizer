@@ -1,7 +1,7 @@
 #include "../matrix/matrix.h"
 
-MAT* scale(MAT *obj, double* s);
-MAT* rotateZ(MAT *obj, double fi);
-MAT* rotateX(MAT *obj, double fi);
-MAT* rotateY(MAT *obj, double fi);
-MAT* translate(MAT* obj, double xt, double yt, double zt);
+MAT* scale(MAT *obj, float s1, float s2, float s3);
+MAT* rotateZ(MAT *obj, float fi);
+MAT* rotateX(MAT *obj, float fi);
+MAT* rotateY(MAT *obj, float fi);
+MAT* translate(MAT* obj, float xt, float yt, float zt);

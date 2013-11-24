@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.5"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
 <title>Software Rasterizer: Plik źródłowy src/screen.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -39,7 +39,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Wygenerowano przez Doxygen 1.8.5 -->
+<!-- Wygenerowano przez Doxygen 1.8.3.1 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
 </script>
@@ -112,26 +112,21 @@ $(document).ready(function(){initNavTree('screen_8h_source.html','');});
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include&lt;allegro5/allegro.h&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include&quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="screen_8h.html#afa61cd3c6c3d8fda39f72e9533446621">    9</a></span>&#160;<span class="keyword">typedef</span> ALLEGRO_DISPLAY <a class="code" href="screen_8h.html#afa61cd3c6c3d8fda39f72e9533446621">screen_t</a>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="code" href="screen_8h.html#afa61cd3c6c3d8fda39f72e9533446621">    9</a></span>&#160;<span class="keyword">typedef</span> ALLEGRO_DISPLAY <a class="code" href="screen_8h.html#afa61cd3c6c3d8fda39f72e9533446621" title="Minimalny wrapper na obsluge ekranu.">screen_t</a>;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> <a class="code" href="screen_8c.html#aa3c4af2475541faf08f48e3f07f1d923">screen_init</a>(<a class="code" href="screen_8h.html#afa61cd3c6c3d8fda39f72e9533446621">screen_t</a> **screen, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> <a class="code" href="screen_8c.html#aa3c4af2475541faf08f48e3f07f1d923" title="Inicjalizacja ekranu.">screen_init</a>(<a class="code" href="screen_8h.html#afa61cd3c6c3d8fda39f72e9533446621" title="Minimalny wrapper na obsluge ekranu.">screen_t</a> **screen, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">void</span> <a class="code" href="screen_8c.html#ae30f9705c2f8a1907908d6be4c254f29">screen_update</a>(<a class="code" href="screen_8h.html#afa61cd3c6c3d8fda39f72e9533446621">screen_t</a> *screen, <a class="code" href="structbitmap__t.html">bitmap_t</a> *bmp);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">void</span> <a class="code" href="screen_8c.html#ae30f9705c2f8a1907908d6be4c254f29" title="Rysowanie bitmapy na ekranie Bitmapa zawsze bedzie rysowana zaczynajac od lewego gornego rogu ekranu...">screen_update</a>(<a class="code" href="screen_8h.html#afa61cd3c6c3d8fda39f72e9533446621" title="Minimalny wrapper na obsluge ekranu.">screen_t</a> *screen, <a class="code" href="structbitmap__t.html" title="Bitmapa.">bitmap_t</a> *bmp);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="types_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div></div>
-<div class="ttc" id="screen_8c_html_aa3c4af2475541faf08f48e3f07f1d923"><div class="ttname"><a href="screen_8c.html#aa3c4af2475541faf08f48e3f07f1d923">screen_init</a></div><div class="ttdeci">void screen_init(screen_t **screen, int width, int height)</div><div class="ttdoc">Inicjalizacja ekranu. </div><div class="ttdef"><b>Definition:</b> screen.c:4</div></div>
-<div class="ttc" id="structbitmap__t_html"><div class="ttname"><a href="structbitmap__t.html">bitmap_t</a></div><div class="ttdoc">Bitmapa. </div><div class="ttdef"><b>Definition:</b> types.h:21</div></div>
-<div class="ttc" id="screen_8c_html_ae30f9705c2f8a1907908d6be4c254f29"><div class="ttname"><a href="screen_8c.html#ae30f9705c2f8a1907908d6be4c254f29">screen_update</a></div><div class="ttdeci">void screen_update(screen_t *screen, bitmap_t *bmp)</div><div class="ttdoc">Rysowanie bitmapy na ekranie Bitmapa zawsze bedzie rysowana zaczynajac od lewego gornego rogu ekranu...</div><div class="ttdef"><b>Definition:</b> screen.c:22</div></div>
-<div class="ttc" id="screen_8h_html_afa61cd3c6c3d8fda39f72e9533446621"><div class="ttname"><a href="screen_8h.html#afa61cd3c6c3d8fda39f72e9533446621">screen_t</a></div><div class="ttdeci">ALLEGRO_DISPLAY screen_t</div><div class="ttdoc">Minimalny wrapper na obsluge ekranu. </div><div class="ttdef"><b>Definition:</b> screen.h:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="screen_8h.html">screen.h</a></li>
-    <li class="footer">Wygenerowano Pn, 11 lis 2013 15:58:58 dla Software Rasterizer programem
+    <li class="footer">Wygenerowano N, 24 lis 2013 18:55:12 dla Software Rasterizer programem
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>
 </div>
 </body>

@@ -2,13 +2,13 @@
 #include "stdio.h"
 #include "transformations.h"
 
-MAT* scale(MAT *obj, double* s){
+MAT* scale(MAT *obj, float s1, float s2, float s3){
 	MAT *scaleMatrix;
 	scaleMatrix = m_get(4, 4);
 	m_zero(scaleMatrix);
-	scaleMatrix->me[0][0] = s[0];
-	scaleMatrix->me[1][1] = s[1];
-	scaleMatrix->me[2][2] = s[2];
+	scaleMatrix->me[0][0] = s1;
+	scaleMatrix->me[1][1] = s2;
+	scaleMatrix->me[2][2] = s3;
 	scaleMatrix->me[3][3] = 1;
 	MAT *result = m_get(4,4);
 	m_mlt(scaleMatrix, obj, result);
@@ -16,7 +16,7 @@ MAT* scale(MAT *obj, double* s){
 	return result;
 }
 
-MAT* rotateZ(MAT *obj, double fi){
+MAT* rotateZ(MAT *obj, float fi){
 	MAT *rotateMatrix = m_get(4, 4);
 	m_zero(rotateMatrix);
 	rotateMatrix->me[0][0] = cos(fi);
@@ -31,7 +31,7 @@ MAT* rotateZ(MAT *obj, double fi){
 	return result; 
 }
 
-MAT* rotateX(MAT *obj, double fi){
+MAT* rotateX(MAT *obj, float fi){
 	MAT *rotateMatrix = m_get(4,4);
 	m_zero(rotateMatrix);
 	rotateMatrix->me[0][0] = 1;
@@ -46,7 +46,7 @@ MAT* rotateX(MAT *obj, double fi){
 	return result; 
 }
 
-MAT* rotateY(MAT *obj, double fi){
+MAT* rotateY(MAT *obj, float fi){
 	MAT *rotateMatrix = m_get(4,4);
 	m_zero(rotateMatrix);
 	rotateMatrix->me[0][0] = cos(fi);
@@ -61,8 +61,8 @@ MAT* rotateY(MAT *obj, double fi){
 	return result; 
 }
 
-MAT* translate(MAT* obj, double xt, double yt, double zt){
-    MAT *tlanslationMatrix = m_get_ident(4);
+MAT* translate(MAT* obj, float xt, float yt, float zt){
+    MAT *translationMatrix = m_get_ident(4);
     translationMatrix->me[3][0] = xt;
     translationMatrix->me[3][1] = yt;
     translationMatrix->me[3][2] = zt;

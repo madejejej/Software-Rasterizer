@@ -1,11 +1,11 @@
 #include "../matrix/matrix.h"
 
-MAT* getViewportTransformation(double nx,double ny,double nz,double widthScreen, double heightScreen);
+MAT* getViewportTransformation(float nx,float ny,float nz,float widthScreen, float heightScreen);
 
-MAT* getOrthographicProjection(double l,double r,double b,double t,double n,double f)
+MAT* getOrthographicProjection(float l,float r,float b,float t,float n,float f)
 
-MAT* getCameraProjection(MAT *obj,double xe,double ye,double ze)
+MAT* getCameraProjection(MAT *obj,float xe,float ye,float ze)
 
-MAT* getPerspectiveProjection(double n, double r, double l, double t, double b, double f)
+MAT* getPerspectiveProjection(float n, float r, float l, float t, float b, float f)
 
 

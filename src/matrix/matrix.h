@@ -1,7 +1,7 @@
 
 typedef	struct	{
 		unsigned int	m, n;
-		double	**me;	
+		float **me;	
 } MAT;
 
 MAT	*m_get(int m, int n);

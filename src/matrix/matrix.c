@@ -17,8 +17,8 @@ MAT	*m_get(int m, int n)
     perror("Initialization faild");
    matrix -> m = m;
    matrix -> n = n;
-   double *buff = malloc(sizeof(double)*m*n);
-   matrix ->me = malloc(m*sizeof(double*));
+   float *buff = malloc(sizeof(float)*m*n);
+   matrix ->me = malloc(m*sizeof(float*));
    for(i=0; i<m; ++i){
     matrix->me[i] = buff + i*n;
    }
@@ -46,7 +46,7 @@ MAT	*m_zero(MAT *A)
 }
 
 MAT *m_get_ident(int m){
-    MAT* new = m_get(m);
+    MAT* new = m_get(m, m);
     m_zero(new);
     int i;
     for(i = 0; i<m; ++i){
@@ -55,11 +55,20 @@ MAT *m_get_ident(int m){
     return new;
 }
 
+MAT *m_copy(MAT* A){
+    int i, j;
+    MAT *copied = m_get(A->m, A->n);
+    for(i=0; i< A->m; ++i)
+        for(j=0; j< A->n; ++j)
+            copied->me[i][j] = A->me[i][j];
+    return copied;
+}
+
 
 MAT	*m_mlt(const MAT *A, const MAT *B, MAT *OUT)
 {
 	unsigned int	i, j,  k, m, n, p;
-	double **A_v, **B_v, sum;
+	float **A_v, **B_v, sum;
 
 	if ( A==(MAT *)NULL || B==(MAT *)NULL )
 		perror("Matrixes cannot be null");
