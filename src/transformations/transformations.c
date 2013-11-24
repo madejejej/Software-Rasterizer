@@ -61,6 +61,17 @@ MAT* rotateY(MAT *obj, double fi){
 	return result; 
 }
 
+MAT* translate(MAT* obj, double xt, double yt, double zt){
+    MAT *tlanslationMatrix = m_get_ident(4);
+    translationMatrix->me[3][0] = xt;
+    translationMatrix->me[3][1] = yt;
+    translationMatrix->me[3][2] = zt;
+    MAT *result = m_get(4,4);
+    m_mlt(translationMatrix, obj, result);
+	M_FREE(translationMatrix);
+	return result; 
+}
+
 
 void print_mat(MAT *obj){
     printf("%f %f %f\n", obj->me[0][0], obj->me[0][1], obj->me[0][2]);
