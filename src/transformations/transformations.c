@@ -4,54 +4,58 @@
 
 MAT* scale(MAT *obj, double* s){
 	MAT *scaleMatrix;
-	scaleMatrix = m_get(3, 3);
+	scaleMatrix = m_get(4, 4);
 	m_zero(scaleMatrix);
 	scaleMatrix->me[0][0] = s[0];
 	scaleMatrix->me[1][1] = s[1];
 	scaleMatrix->me[2][2] = s[2];
-	MAT *result = m_get(3,3);
+	scaleMatrix->me[3][3] = 1;
+	MAT *result = m_get(4,4);
 	m_mlt(scaleMatrix, obj, result);
 	M_FREE(scaleMatrix);
 	return result;
 }
 
 MAT* rotateZ(MAT *obj, double fi){
-	MAT *rotateMatrix = m_get(3,3);
+	MAT *rotateMatrix = m_get(4, 4);
 	m_zero(rotateMatrix);
 	rotateMatrix->me[0][0] = cos(fi);
 	rotateMatrix->me[0][1] = -sin(fi);
 	rotateMatrix->me[1][0] = sin(fi);
 	rotateMatrix->me[1][1] = cos(fi);
 	rotateMatrix->me[2][2] = 1;
-	MAT *result = m_get(3,3);
+	rotateMatrix->me[3][3] = 1;
+	MAT *result = m_get(4,4);
 	m_mlt(rotateMatrix, obj, result);
 	M_FREE(rotateMatrix);
 	return result; 
 }
 
 MAT* rotateX(MAT *obj, double fi){
-	MAT *rotateMatrix = m_get(3,3);
+	MAT *rotateMatrix = m_get(4,4);
 	m_zero(rotateMatrix);
 	rotateMatrix->me[0][0] = 1;
 	rotateMatrix->me[1][1] = cos(fi);
 	rotateMatrix->me[1][2] = -sin(fi);
 	rotateMatrix->me[2][1] = sin(fi);
 	rotateMatrix->me[2][2] = cos(fi);
-	MAT *result = m_get(3,3);
+	rotateMatrix->me[3][3] = 1;
+	MAT *result = m_get(4,4);
 	m_mlt(rotateMatrix, obj, result);
 	M_FREE(rotateMatrix);
 	return result; 
 }
 
 MAT* rotateY(MAT *obj, double fi){
-	MAT *rotateMatrix = m_get(3,3);
+	MAT *rotateMatrix = m_get(4,4);
 	m_zero(rotateMatrix);
 	rotateMatrix->me[0][0] = cos(fi);
 	rotateMatrix->me[0][2] = sin(fi);
 	rotateMatrix->me[1][1] = 1;
 	rotateMatrix->me[2][0] = -sin(fi);
 	rotateMatrix->me[2][2] = cos(fi);
-	MAT *result = m_get(3,3);
+	rotateMatrix->me[3][3] = 1;
+	MAT *result = m_get(4,4);
 	m_mlt(rotateMatrix, obj, result);
 	M_FREE(rotateMatrix);
 	return result; 
@@ -65,7 +69,7 @@ void print_mat(MAT *obj){
 }
 
 
-int main(int argc, char **arv) {
+/*int main(int argc, char **arv) {
     MAT *obj = m_get(3,3);
     m_zero(obj);
     obj->me[0][0] = 1;
@@ -90,5 +94,5 @@ int main(int argc, char **arv) {
     print_mat(result);
     M_FREE(result);
     return 0;
-}
+}*/
 
