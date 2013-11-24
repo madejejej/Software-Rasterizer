@@ -30,6 +30,8 @@ void M_FREE(MAT *A){
     free(A);
 }
 
+
+
 MAT	*m_zero(MAT *A)
 {
 	int	i,j, A_m, A_n;
@@ -43,6 +45,15 @@ MAT	*m_zero(MAT *A)
 	return A;
 }
 
+MAT *m_get_ident(int m){
+    MAT* new = m_get(m);
+    m_zero(new);
+    int i;
+    for(i = 0; i<m; ++i){
+        new -> me[i][i] = 1;
+    }
+    return new;
+}
 
 
 MAT	*m_mlt(const MAT *A, const MAT *B, MAT *OUT)
