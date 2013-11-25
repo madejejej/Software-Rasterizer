@@ -2,94 +2,123 @@
 #include "../types.h"
 #include "../matrix/matrix_stack.h"
 #include "../transformations/transformations.h"
+#include "../transformations/viewTransformations.h"
 
 #include<stdlib.h>
 #include<stdio.h>
 #include<string.h>
 
+#define MAX_TRI_PER_MESH 16
+
 scene_t* read_scene_from_file(FILE *file) {
+  fprintf(stderr, "Reading scene file...\n");
+  initMatrixStack();
   scene_t *scene = (scene_t*)malloc(sizeof(scene_t));
   scene->total_tris = 0;
   scene->n = 0;
+  scene->M_proj = getPerspectiveProjection(1, 4, -4, 3, -3, 100);
+  scene->M_viewport = NULL;
   scene->meshes = (mesh_t*)malloc(1024*sizeof(mesh_t));
-  char cmd[256];
+  scene->meshes[0].tris = (triangle_t*)malloc(MAX_TRI_PER_MESH*sizeof(triangle_t));
+  char cmd[1024];
   vec4_t *vertices;  
   int maxVerts;
   int currentVerts = 0;
   fcolor_t currentColor;
-  int width, height;
+  currentColor.r = 0.0f;
+  currentColor.g = 0.0f;
+  currentColor.b = 0.0f;
+  fcolor_t vertColor;
+  vertColor.r = 0.0f;
+  vertColor.g = 0.0f;
+  vertColor.b = 0.0f;
+  float width, height;
   triangle_t *tris = (triangle_t*)malloc(1024*sizeof(triangle_t));
   int currentTri = 0;
   mesh_t *currentMesh = &scene->meshes[0];
-  fscanf(file, "%s", cmd);
-  if(strcmp(cmd, "maxverts") == 0) {
-    fscanf(file, "%d", &maxVerts);
-    vertices = (vec4_t*)malloc(maxVerts*sizeof(vec4_t));
-  } else if(strcmp(cmd, "size") == 0) {
-    fscanf(file, "%d %d", &width, &height);
-  } else if(strcmp(cmd, "vertex") == 0) {
-    float x,y,z;
-    fscanf(file, "%f %f %f", &x, &y, &z);
-    vertices[currentVerts].x = x; 
-    vertices[currentVerts].y = y; 
-    vertices[currentVerts].z = z; 
-    vertices[currentVerts].t = 1; 
-    vertices[currentVerts].color = currentColor;
-    currentVerts++;
-  } else if(strcmp(cmd, "ambient") == 0) {
-    float r,g,b;
-    fscanf(file, "%f %f %f", &r, &g, &b);
-    currentColor.r = r;
-    currentColor.g = g;
-    currentColor.b = b;
-  } else if(strcmp(cmd, "tri") == 0) {
-    int v1,v2,v3;
-    fscanf(file, "%d %d %d", &v1, &v2, &v3);
-    tris[currentTri].verts[0] = vertices[v1];
-    tris[currentTri].verts[1] = vertices[v2];
-    tris[currentTri].verts[2] = vertices[v3];
-    scene->total_tris++;
-    currentMesh->tris[currentMesh->n++] = tris[currentTri];
-    currentTri++;
-  } else if(cmd[0]=="#") {
-    fgets(cmd, 250, file); // comment - ignore whole line
-  } else if(strcmp(cmd, "pushTransform") == 0) {
-    pushMatrix(cloneMatrix(topMatrix));
-    if(currentMesh->n > 0) {
-      scene->n++;
-      currentMesh = &scene->meshes[scene->n];
+  currentMesh->transform = topMatrix();
+  while(fscanf(file, "%s", cmd)) {
+    if(feof(file)) {
+      break;
     }
-  } else if(strcmp(cmd, "popMatrix") == 0) {
-    popMatrix();
-    if(currentMesh->n > 0) {
-      scene->n++;
-      currentMesh = &scene->meshes[scene->n];
+    fprintf(stderr, "Read command: %s\n", cmd);
+    if(strcmp(cmd, "maxverts") == 0) {
+      fscanf(file, "%d", &maxVerts);
+      vertices = (vec4_t*)malloc(maxVerts*sizeof(vec4_t));
+    } else if(strcmp(cmd, "size") == 0) {
+      fscanf(file, "%f %f", &width, &height);
+      fprintf(stderr, "Scene size: %f %f\n", width, height);
+      scene->M_viewport = getViewportTransformation(width, height);
+    } else if(strcmp(cmd, "vertex") == 0) {
+      float x,y,z;
+      fscanf(file, "%f %f %f", &x, &y, &z);
+      vertices[currentVerts].x = x; 
+      vertices[currentVerts].y = y; 
+      vertices[currentVerts].z = z; 
+      vertices[currentVerts].t = 1; 
+      vertices[currentVerts].color = vertColor;
+      currentVerts++;
+    } else if(strcmp(cmd, "vertColor") == 0) {
+      float r,g,b;
+      fscanf(file, "%f %f %f", &r, &g, &b);
+      vertColor.r = r;
+      vertColor.g = g;
+      vertColor.b = b;
+    } else if(strcmp(cmd, "tri") == 0) {
+      int v1,v2,v3;
+      fscanf(file, "%d %d %d", &v1, &v2, &v3);
+      fprintf(stderr, "Read %d triangle - points %d %d %d\n",
+                currentTri, v1, v2, v3);
+      fprintf(stderr, "Current mesh already has %d triangles\n", currentMesh->n);
+      tris[currentTri].verts[0] = vertices[v1];
+      tris[currentTri].verts[1] = vertices[v2];
+      tris[currentTri].verts[2] = vertices[v3];
+      scene->total_tris++;
+      currentMesh->tris[currentMesh->n++] = tris[currentTri];
+      currentTri++;
+    } else if(cmd[0]=='#') {
+      fgets(cmd, 250, file); // comment - ignore whole line
+    } else if(strcmp(cmd, "pushTransform") == 0) {
+      pushMatrix(m_copy(topMatrix()));
+      if(currentMesh->n > 0) {
+        scene->n++;
+        currentMesh = &scene->meshes[scene->n];
+        currentMesh->tris = (triangle_t*)malloc(MAX_TRI_PER_MESH*sizeof(triangle_t));
+      }
+      currentMesh->transform = topMatrix();
+    } else if(strcmp(cmd, "popTransform") == 0) {
+      popMatrix();
+      if(currentMesh->n > 0) {
+        scene->n++;
+        currentMesh = &scene->meshes[scene->n];
+        currentMesh->tris = (triangle_t*)malloc(MAX_TRI_PER_MESH*sizeof(triangle_t));
+      }
+      currentMesh->transform = topMatrix();
+    } else if(strcmp(cmd, "scale") == 0) {
+      float sx, sy, sz;
+      fscanf(file, "%f %f %f", &sx, &sy, &sz);
+      MAT *top = topMatrix();
+      top = scale(top, sx, sy, sz);
+    } else if(strcmp(cmd, "translate") == 0) {
+      float dx,dy,dz;
+      fscanf(file, "%f %f %f", &dx, &dy, &dz);
+      MAT *top = topMatrix();
+      top = translate(top, dx, dy, dz);
+    } else if(strcmp(cmd, "rotate") == 0) {
+      float rx, ry, rz;
+      fscanf(file, "%f %f %f", &rx, &ry, &rz);
+     // MAT *top = topMatrix();
+     // top = rotate(top, rx, ry, rz);
+    } else if(strcmp(cmd, "camera") == 0) {
+      float fromx, fromy, fromz;
+      float atx, aty, atz;
+      float upx, upy, upz;
+      float fovy;
+      // TODO
+    } else if(strcmp(cmd, "ambient") == 0) {
+      // TODO
     }
-  } else if(strcmp(cmd, "scale") == 0) {
-    float scaleFactors[3];
-    fscanf(file, "%f %f %f", scaleFactors[0], scaleFactors[1], scaleFactors[2]);
-    MAT *top = topMatrix();
-    top = scale(top, scaleFactors);
-  } else if(strcmp(cmd, "translate") == 0) {
-    float dx,dy,dz;
-    fscanf(file, "%f %f %f", &dx, &dy, &dz);
-    MAT *top = topMatrix();
-    top = translate(top, dx, dy, dz);
-  } else if(strcmp(cmd, "rotate") == 0) {
-    float rx, ry, rz;
-    fscanf(file, "%f %f %f", &rx, &ry, &rz);
-    MAT *top = topMatrix();
-    top = rotate(top, rx, ry, rz);
-  } else if(strcmp(cmd, "camera") == 0) {
-    float fromx, fromy, fromz;
-    float atx, aty, atz;
-    float upx, upy, upz;
-    float fovy;
-    // TODO
-  } else if(strcmp(cmd, "ambient") == 0) {
-    // TODO
-  }
-
+  } 
   return scene;
 }
 
