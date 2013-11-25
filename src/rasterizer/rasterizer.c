@@ -43,8 +43,11 @@ void rasterize(bitmap_t *bmp, triangle2d_t *triangles, int n) {
   }
   clear_depth_buffer();
   int i;
+  fprintf(stderr, "rasterization stage started...\n");
+  fprintf(stderr, "%d triangles\n", n);
   for(i=0; i<n; i++) {
     triangle2d_t tri = triangles[i];
+    fprintf(stderr, "Triangle %d with vertices: (%f, %f), (%f, %f), (%f, %f)\n", (i+1), tri.v1.x, tri.v1.y, tri.v2.x, tri.v2.y, tri.v3.x, tri.v3.y);
 
     float x0 = tri.v1.x; float y0 = tri.v1.y;
     float x1 = tri.v2.x; float y1 = tri.v2.y;
