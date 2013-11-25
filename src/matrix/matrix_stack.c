@@ -1,6 +1,7 @@
 #include "matrix_stack.h"
 
 #include <stdlib.h>
+#include<stdio.h>
 
 typedef struct mat_node_t {
   MAT* mat;
@@ -39,4 +40,8 @@ void pushMatrix(MAT* matrix) {
   newHead->mat = matrix;
   newHead->prev = head;
   head = newHead;
+  fprintf(stderr, "topMatrix:\n");
+  print_mat(topMatrix());
 }
+
+
