@@ -4,8 +4,9 @@
 #include "../types.h"
 #include "camera.h"
 
+
 typedef struct {
-  triangles *tris;
+  triangle_t *tris;
   int n;
   MAT *transform;
 } mesh_t;
@@ -13,7 +14,7 @@ typedef struct {
 typedef struct {
   mesh_t *meshes;
   int n;
-  cam_t *camera;
+  camera_t *camera;
   MAT *M_viewport;
   MAT *M_proj;
   int total_tris;
