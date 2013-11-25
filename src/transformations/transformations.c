@@ -72,13 +72,13 @@ MAT* translate(MAT* obj, float xt, float yt, float zt){
 	return result; 
 }
 
-
+/*
 void print_mat(MAT *obj){
     printf("%f %f %f\n", obj->me[0][0], obj->me[0][1], obj->me[0][2]);
     printf("%f %f %f\n", obj->me[1][0], obj->me[1][1], obj->me[1][2]);
     printf("%f %f %f\n", obj->me[2][0], obj->me[2][1], obj->me[2][2]);
 }
-
+*/
 
 /*int main(int argc, char **arv) {
     MAT *obj = m_get(3,3);
