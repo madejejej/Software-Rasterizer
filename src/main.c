@@ -1,36 +1,77 @@
 #include"screen.h"
 #include"types.h"
 #include"rasterizer/rasterizer.h"
+#include"scene/scene.h"
+#include"scene/scene_file.h"
 
-#define WIDTH 1280 
-#define HEIGHT 876 
+#include<stdio.h>
+
+#define WIDTH 1000 
+#define HEIGHT 1000 
 
 ALLEGRO_EVENT_QUEUE *event_queue;
+screen_t *display;
+scene_t *scene;
+bitmap_t bmp;
+
+void setup();
+void render();
+void cleanup();
+
+int main(int argc, char **arv) {
+  setup();
+
+  while(true) {
+    render();
+    ALLEGRO_EVENT ev;
+    al_wait_for_event(event_queue, &ev);
+    if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+      break;
+    }
+  }
+
+  cleanup();
+  return 0;
+}
 
 void setup() {
-  screen_t *display = NULL;
   screen_init(&display, WIDTH, HEIGHT);
 
-  bitmap_t bmp;
   bmp.w = WIDTH;
   bmp.h = HEIGHT;
   bmp.data = (color_t*)malloc(bmp.w*bmp.h*sizeof(int));
   int i;
   for(i=0; i<bmp.w*bmp.h; i++) {
-    bmp.data[i] = 0xFF0000;
+    bmp.data[i] = 0x000000;
   }
 
-//  scene_t *scene = read_scene_from_file(
+  FILE *sceneFile = fopen("scenes/scene1.scene", "r");
+  if(!sceneFile) {
+    fprintf(stderr, "Cant open scene file!\n");
+    exit(-1);
+  }
+  scene = read_scene_from_file(sceneFile);
+  fclose(sceneFile);
 
   event_queue = al_create_event_queue();
   al_register_event_source(event_queue, al_get_display_event_source(display));
 }
 
-int main(int argc, char **arv) {
-  screen_t *display = NULL;
+void render() {
+  scene_draw(scene, &bmp);
+  screen_update(display, &bmp);
+}
 
+
+void cleanup() {
+  al_destroy_display(display);
+  al_destroy_event_queue(event_queue);
+  rasterizer_free_memory();
+  free(bmp.data);
+}
+
+void render_sample_triangle() {
   screen_init(&display, WIDTH, HEIGHT);
-  bitmap_t bmp;
   bmp.w = WIDTH;
   bmp.h = HEIGHT;
   bmp.data = (color_t*)malloc(bmp.w*bmp.h*sizeof(int));
@@ -59,9 +100,4 @@ int main(int argc, char **arv) {
       break;
     }
   }
-  al_destroy_display(display);
-  al_destroy_event_queue(event_queue);
-  rasterizer_free_memory();
-  free(bmp.data);
-  return 0;
 }
