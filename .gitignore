@@ -23,4 +23,7 @@
 # build dir
 /build/*
 
+# docs directory
+/doc/*
+
 .DS_Store
