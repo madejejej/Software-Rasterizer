@@ -1,4 +1,5 @@
 #include "matrix.h"
+#include"../types.h"
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -96,3 +97,11 @@ MAT	*m_mlt(const MAT *A, const MAT *B, MAT *OUT)
 }
 
 
+MAT* vec_to_mat(vec4_t vec) {
+  MAT *m = m_get(1,4);
+  m->me[0][0] = vec.x;
+  m->me[0][1] = vec.y;
+  m->me[0][2] = vec.z;
+  m->me[0][3] = vec.t;
+  return m;
+}
