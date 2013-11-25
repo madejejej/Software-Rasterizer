@@ -4,12 +4,16 @@
 typedef unsigned int color_t;
 
 typedef struct {
+  float r,g,b;
+} fcolor_t;
+
+typedef struct {
   float x,y,z,t;
-  color_t color;
+  fcolor_t color;
 } vec4_t;
 
 typedef struct {
-  vec4_t v1,v2,v3;
+  vec4_t verts[3];
 } triangle_t;
 
 /**
