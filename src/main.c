@@ -5,6 +5,27 @@
 #define WIDTH 1280 
 #define HEIGHT 876 
 
+ALLEGRO_EVENT_QUEUE *event_queue;
+
+void setup() {
+  screen_t *display = NULL;
+  screen_init(&display, WIDTH, HEIGHT);
+
+  bitmap_t bmp;
+  bmp.w = WIDTH;
+  bmp.h = HEIGHT;
+  bmp.data = (color_t*)malloc(bmp.w*bmp.h*sizeof(int));
+  int i;
+  for(i=0; i<bmp.w*bmp.h; i++) {
+    bmp.data[i] = 0xFF0000;
+  }
+
+//  scene_t *scene = read_scene_from_file(
+
+  event_queue = al_create_event_queue();
+  al_register_event_source(event_queue, al_get_display_event_source(display));
+}
+
 int main(int argc, char **arv) {
   screen_t *display = NULL;
 
