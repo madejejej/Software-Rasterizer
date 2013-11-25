@@ -98,10 +98,19 @@ MAT	*m_mlt(const MAT *A, const MAT *B, MAT *OUT)
 
 
 MAT* vec_to_mat(vec4_t vec) {
-  MAT *m = m_get(1,4);
+  MAT *m = m_get(4,1);
   m->me[0][0] = vec.x;
-  m->me[0][1] = vec.y;
-  m->me[0][2] = vec.z;
-  m->me[0][3] = vec.t;
+  m->me[1][0] = vec.y;
+  m->me[2][0] = vec.z;
+  m->me[3][0] = vec.t;
   return m;
 }
+
+void print_mat(MAT *obj){
+    printf("%f %f %f %f\n", obj->me[0][0], obj->me[0][1], obj->me[0][2], obj->me[0][3]);
+    printf("%f %f %f %f\n", obj->me[1][0], obj->me[1][1], obj->me[1][2], obj->me[1][3]);
+    printf("%f %f %f %f\n", obj->me[2][0], obj->me[2][1], obj->me[2][2], obj->me[2][3]);
+    printf("%f %f %f %f\n", obj->me[3][0], obj->me[3][1], obj->me[3][2], obj->me[3][3]);
+}
+
+
