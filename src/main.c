@@ -13,12 +13,18 @@ ALLEGRO_EVENT_QUEUE *event_queue;
 screen_t *display;
 scene_t *scene;
 bitmap_t bmp;
+char *scene_file_name;
 
 void setup();
 void render();
 void cleanup();
 
-int main(int argc, char **arv) {
+int main(int argc, char **argv) {
+  if(argc != 2) {
+    fprintf(stderr, "Usage: main scene_file_path\n");
+    exit(-1);
+  }
+  scene_file_name = argv[1];
   setup();
 
   while(true) {
@@ -45,9 +51,9 @@ void setup() {
     bmp.data[i] = 0x000000;
   }
 
-  FILE *sceneFile = fopen("scenes/scene1.scene", "r");
+  FILE *sceneFile = fopen(scene_file_name, "r");
   if(!sceneFile) {
-    fprintf(stderr, "Cant open scene file!\n");
+    fprintf(stderr, "Cant open scene file: %s\n", scene_file_name);
     exit(-1);
   }
   scene = read_scene_from_file(sceneFile);
