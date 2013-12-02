@@ -16,7 +16,9 @@ scene_t* read_scene_from_file(FILE *file) {
   scene_t *scene = (scene_t*)malloc(sizeof(scene_t));
   scene->total_tris = 0;
   scene->n = 0;
-  scene->M_proj = getPerspectiveProjection(1, 4, -4, 3, -3, 100);
+  scene->M_proj = getPerspectiveProjection(-9, 4, -4, 3, -3, 10000);
+  scene->near = -9;
+  scene->far = 10000;
   scene->M_viewport = NULL;
   scene->meshes = (mesh_t*)malloc(1024*sizeof(mesh_t));
   scene->meshes[0].tris = (triangle_t*)malloc(MAX_TRI_PER_MESH*sizeof(triangle_t));

@@ -18,6 +18,8 @@ typedef struct {
   MAT *M_viewport;
   MAT *M_proj;
   int total_tris;
+  float near;
+  float far;
 } scene_t;
 
 
