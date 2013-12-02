@@ -38,7 +38,7 @@ MAT* getOrthographicProjection(float l,float r,float b,float t,float n,float f){
     return transMat;
 }
 
-MAT* getCameraProjection(MAT *obj,float xe,float ye,float ze){
+MAT* getCameraProjection(float xe,float ye,float ze){
     MAT* tmp = m_get(4,4);
     m_zero(tmp);
     tmp->me[0][0] = 1;
@@ -48,8 +48,7 @@ MAT* getCameraProjection(MAT *obj,float xe,float ye,float ze){
     tmp->me[0][3] = -xe;
     tmp->me[1][3] = -ye;
     tmp->me[2][3] = -ze;
-    MAT *res;
-    return m_mlt(obj, tmp, res);
+    return tmp;
 }
 
 MAT* getPerspectiveProjection(float n, float r, float l, float t, float b, float f){
