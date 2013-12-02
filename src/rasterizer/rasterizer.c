@@ -28,7 +28,7 @@ void init_depth_buffer(int width, int height) {
 void clear_depth_buffer() {
   int i;
   for(i=0;i<depth_buffer_size; i++) {
-    depth_buffer[i] = INT_MAX;
+    depth_buffer[i] = UINT_MAX;
   }
 }
 
@@ -51,7 +51,7 @@ void rasterize(bitmap_t *bmp, triangle2d_t *triangles, int n) {
 
     float x0 = tri.v1.x; float y0 = tri.v1.y;
     float x1 = tri.v2.x; float y1 = tri.v2.y;
-    float x2 = tri.v3.x; float y2 = tri.v3.x;
+    float x2 = tri.v3.x; float y2 = tri.v3.y;
     int xmin = floor(fmin(x0, fmin(x1,x2)));
     int xmax = ceil(fmax(x0, fmax(x1,x2)));
     int ymin = floor(fmin(y0, fmin(y1,y2)));
@@ -71,11 +71,15 @@ void rasterize(bitmap_t *bmp, triangle2d_t *triangles, int n) {
           unsigned int depth_value = interp_uint(tri.v1.depth,
               tri.v2.depth, tri.v3.depth, alpha, beta, gamma);
           if(depth_value > depth_buffer[y*bmp->w + x]) {
+//            fprintf(stderr, "Fragment not rendered - triangle %d, (alpha, beta, gamma) = (%f, %f, %f), depth: %ud, depth buffer: %ud\n", i, alpha, beta, gamma, depth_value, depth_buffer[y*bmp->w + x]); 
             continue;
           }
           depth_buffer[y*bmp->w + x] = depth_value;
           color_t col = interp_colors(tri.v1.color, tri.v2.color, tri.v3.color, alpha, beta, gamma);
+ //         fprintf(stderr, "point in triangle: (%d, %d), (a,b,y)=(%f,%f,%f), color:%x\n", x,y,alpha,beta,gamma, col);
           put_pixel(bmp, x, y, col);
+        } else {
+//          fprintf(stderr, "point not in triangle: (%d, %d), (a,b,y)=(%f,%f,%f)\n", x,y,alpha,beta,gamma);
         }
       }
     }
