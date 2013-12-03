@@ -96,6 +96,12 @@ MAT	*m_mlt(const MAT *A, const MAT *B, MAT *OUT)
 	return OUT;
 }
 
+MAT *m_mlt_self_left(MAT *A, const MAT *B) {
+  MAT *old = m_copy(A);
+  m_mlt(B, old, A);
+  return A;
+}
+
 
 MAT* vec_to_mat(vec4_t vec) {
   MAT *m = m_get(4,1);
