@@ -100,17 +100,17 @@ scene_t* read_scene_from_file(FILE *file) {
       float sx, sy, sz;
       fscanf(file, "%f %f %f", &sx, &sy, &sz);
       MAT *top = topMatrix();
-      top = scale(top, sx, sy, sz);
+      scale(top, sx, sy, sz);
     } else if(strcmp(cmd, "translate") == 0) {
       float dx,dy,dz;
       fscanf(file, "%f %f %f", &dx, &dy, &dz);
       MAT *top = topMatrix();
-      top = translate(top, dx, dy, dz);
+      translate(top, dx, dy, dz);
     } else if(strcmp(cmd, "rotate") == 0) {
       float rx, ry, rz;
       fscanf(file, "%f %f %f", &rx, &ry, &rz);
-     // MAT *top = topMatrix();
-     // top = rotate(top, rx, ry, rz);
+      MAT *top = topMatrix();
+      rotate(top, rx, ry, rz);
     } else if(strcmp(cmd, "camera") == 0) {
       float fromx, fromy, fromz;
       float atx, aty, atz;
