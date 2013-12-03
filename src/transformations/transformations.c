@@ -1,6 +1,7 @@
 #include "math.h"
 #include "stdio.h"
 #include "transformations.h"
+#include "../matrix/matrix.h"
 
 MAT* scale(MAT *obj, float s1, float s2, float s3){
 	MAT *scaleMatrix;
@@ -10,10 +11,9 @@ MAT* scale(MAT *obj, float s1, float s2, float s3){
 	scaleMatrix->me[1][1] = s2;
 	scaleMatrix->me[2][2] = s3;
 	scaleMatrix->me[3][3] = 1;
-	MAT *result = m_get(4,4);
-	m_mlt(scaleMatrix, obj, result);
+	m_mlt_self_left(obj, scaleMatrix);
 	M_FREE(scaleMatrix);
-	return result;
+	return obj;
 }
 
 MAT* rotateZ(MAT *obj, float fi){
@@ -25,10 +25,9 @@ MAT* rotateZ(MAT *obj, float fi){
 	rotateMatrix->me[1][1] = cos(fi);
 	rotateMatrix->me[2][2] = 1;
 	rotateMatrix->me[3][3] = 1;
-	MAT *result = m_get(4,4);
-	m_mlt(rotateMatrix, obj, result);
+	m_mlt_self_left(obj, rotateMatrix);
 	M_FREE(rotateMatrix);
-	return result; 
+	return obj; 
 }
 
 MAT* rotateX(MAT *obj, float fi){
@@ -40,10 +39,9 @@ MAT* rotateX(MAT *obj, float fi){
 	rotateMatrix->me[2][1] = sin(fi);
 	rotateMatrix->me[2][2] = cos(fi);
 	rotateMatrix->me[3][3] = 1;
-	MAT *result = m_get(4,4);
-	m_mlt(rotateMatrix, obj, result);
+	m_mlt_self_left(obj, rotateMatrix);
 	M_FREE(rotateMatrix);
-	return result; 
+	return obj; 
 }
 
 MAT* rotateY(MAT *obj, float fi){
@@ -55,21 +53,27 @@ MAT* rotateY(MAT *obj, float fi){
 	rotateMatrix->me[2][0] = -sin(fi);
 	rotateMatrix->me[2][2] = cos(fi);
 	rotateMatrix->me[3][3] = 1;
-	MAT *result = m_get(4,4);
-	m_mlt(rotateMatrix, obj, result);
+	m_mlt_self_left(obj, rotateMatrix);
 	M_FREE(rotateMatrix);
-	return result; 
+	return obj; 
+}
+
+MAT *rotate(MAT *obj, float rx, float ry, float rz) {
+  rotateX(obj, rx);
+  rotateY(obj, ry);
+  rotateZ(obj, rz);
+  return obj;
 }
 
 MAT* translate(MAT* obj, float xt, float yt, float zt){
     MAT *translationMatrix = m_get_ident(4);
-    translationMatrix->me[3][0] = xt;
-    translationMatrix->me[3][1] = yt;
-    translationMatrix->me[3][2] = zt;
-    MAT *result = m_get(4,4);
-    m_mlt(translationMatrix, obj, result);
-	M_FREE(translationMatrix);
-	return result; 
+    translationMatrix->me[0][3] = xt;
+    translationMatrix->me[1][3] = yt;
+    translationMatrix->me[2][3] = zt;
+    print_mat(translationMatrix);
+    m_mlt_self_left(obj, translationMatrix);
+  	M_FREE(translationMatrix);
+	  return obj; 
 }
 
 /*
@@ -88,22 +92,22 @@ void print_mat(MAT *obj){
     obj->me[2][2] = 1;
     double a = 3;
     double s[3] = {a,a,a};
-    MAT *result = scale(obj, s);
+    MAT *obj = scale(obj, s);
     printf("Scale:");
-    print_mat(result);
-    M_FREE(result);
-    result = rotateZ(obj, 90.0);
+    print_mat(obj);
+    M_FREE(obj);
+    obj = rotateZ(obj, 90.0);
     printf("Rotate Z:");
-    print_mat(result);
-    M_FREE(result);
-    result = rotateX(obj, 90.0);
+    print_mat(obj);
+    M_FREE(obj);
+    obj = rotateX(obj, 90.0);
     printf("Rotate X:");
-    print_mat(result);
-    M_FREE(result);
-    result = rotateY(obj, 90.0);
+    print_mat(obj);
+    M_FREE(obj);
+    obj = rotateY(obj, 90.0);
     printf("Rotate Y:");
-    print_mat(result);
-    M_FREE(result);
+    print_mat(obj);
+    M_FREE(obj);
     return 0;
 }*/
 
