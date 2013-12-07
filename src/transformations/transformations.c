@@ -1,4 +1,4 @@
-#include "math.h"
+#include <math.h>
 #include "stdio.h"
 #include "transformations.h"
 #include "../matrix/matrix.h"
@@ -58,10 +58,25 @@ MAT* rotateY(MAT *obj, float fi){
 	return obj; 
 }
 
-MAT *rotate(MAT *obj, float rx, float ry, float rz) {
-  rotateX(obj, rx);
-  rotateY(obj, ry);
-  rotateZ(obj, rz);
+MAT *rotate(MAT *obj, float degrees, vec3_t axis) {
+  float theta = M_PI/180.0 * degrees;
+  float s = sin(theta);
+  float c = cos(theta);
+  float x = axis.x, y=axis.y, z=axis.z;
+  MAT *rotationMatrix = m_get_ident(4);
+
+  rotationMatrix->me[0][0] = c + (1-c)*x*x;
+  rotationMatrix->me[0][1] = (1-c)*x*y - s*z; 
+  rotationMatrix->me[0][2] = (1-c)*x*z + s*y; 
+
+  rotationMatrix->me[1][0] = (1-c)*x*y + s*z; 
+  rotationMatrix->me[1][1] = c + (1-c)*y*y;
+  rotationMatrix->me[1][2] = (1-c)*y*z - s*x; 
+
+  rotationMatrix->me[2][0] = (1-c)*x*z - s*y; 
+  rotationMatrix->me[2][1] = (1-c)*y*z + s*x; 
+  rotationMatrix->me[2][2] = c + (1-c)*z*z;
+  m_mlt_self_left(obj, rotationMatrix);
   return obj;
 }
 
