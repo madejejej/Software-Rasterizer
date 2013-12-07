@@ -3,6 +3,7 @@
 #include "../matrix/matrix_stack.h"
 #include "../transformations/transformations.h"
 #include "../transformations/viewTransformations.h"
+#include "../vec.h"
 
 #include<stdlib.h>
 #include<stdio.h>
@@ -107,15 +108,20 @@ scene_t* read_scene_from_file(FILE *file) {
       MAT *top = topMatrix();
       translate(top, dx, dy, dz);
     } else if(strcmp(cmd, "rotate") == 0) {
-      float rx, ry, rz;
-      fscanf(file, "%f %f %f", &rx, &ry, &rz);
+      vec3_t axis;
+      float degrees;
+      fscanf(file, "%f %f %f %f", &axis.x, &axis.y, &axis.z, &degrees); 
       MAT *top = topMatrix();
-      rotate(top, rx, ry, rz);
+      rotate(top, degrees, axis); 
     } else if(strcmp(cmd, "camera") == 0) {
-      float fromx, fromy, fromz;
-      float atx, aty, atz;
-      float upx, upy, upz;
+      vec3_t eye, center, up;
       float fovy;
+      fscanf(file, "%f %f %f %f %f %f %f %f %f %f", 
+          &eye.x, &eye.y, &eye.z,
+          &center.x, &center.y, &center.z,
+          &up.x, &up.y, &up.z, &fovy);
+      up = v3_up(eye, v3_sub(eye, center));
+      scene->M_cam = lookAt( eye, center, up ); 
       // TODO
     } else if(strcmp(cmd, "ambient") == 0) {
       // TODO
