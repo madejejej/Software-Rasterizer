@@ -1,7 +1,7 @@
 LDFLAGS = -L/usr/local/lib -lallegro -lallegro_main -lm
 IFLAGS = -I/usr/local/include
 SRC = src/%.c 
-_OBJS = main.o screen.o rasterizer.o bitmap.o types.o matrix.o transformations.o scene_file.o scene.o matrix_stack.o viewTransformations.o
+_OBJS = main.o screen.o rasterizer.o bitmap.o types.o matrix.o transformations.o scene_file.o scene.o matrix_stack.o viewTransformations.o vec.o
 OBJS = $(patsubst %,build/%,$(_OBJS))
 
 all: $(OBJS) 
