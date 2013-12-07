@@ -1,4 +1,5 @@
 #include "../matrix/matrix.h"
+#include "../vec.h"
 
 MAT* getViewportTransformation(float nx,float ny);
 
