@@ -1,5 +1,6 @@
 #include "scene.h"
 #include "../types.h"
+#include"../transformations/viewTransformations.h"
 #include"../rasterizer/rasterizer.h"
 #include<stdlib.h>
 #include<stdio.h>
@@ -20,13 +21,20 @@ void scene_draw(scene_t *scene, bitmap_t* bmp) {
 
 triangle2d_t* scene_compute_tris_to_rasterize(scene_t *scene) {
   int mesh_num;
-  MAT *M_vpproj = m_get(4,4);
+  MAT *M_vpproj = m_get_ident(4);
+  m_mlt_self_left(M_vpproj, scene->M_cam);
+  fprintf(stderr, "Camera:\n");
+  print_mat(M_vpproj);
   fprintf(stderr, "viewport:\n"); 
   print_mat(scene->M_viewport);
   fprintf(stderr, "Projection:\n");
   print_mat(scene->M_proj);
-  m_mlt(scene->M_viewport, scene->M_proj, M_vpproj);
-  fprintf(stderr, "viewport*projection:\n");
+  fprintf(stderr, "Camera:\n");
+  m_mlt_self_left(M_vpproj, scene->M_proj);
+  fprintf(stderr, "Projection*Camera:\n");
+  print_mat(M_vpproj);
+  m_mlt_self_left(M_vpproj, scene->M_viewport);
+  fprintf(stderr, "Viewport*Projection*Camera:\n");
   print_mat(M_vpproj);
   int tris_computed = 0;
   triangle2d_t *projected_tris = (triangle2d_t*)malloc(sizeof(triangle2d_t) * scene->total_tris);
@@ -49,14 +57,13 @@ triangle2d_t* scene_compute_tris_to_rasterize(scene_t *scene) {
         MAT *transform = m_get(4,4);
         m_mlt(M_vpproj, current_mesh.transform, transform);
         m_mlt(transform, currentPoint, proj_point);
-        projectedPoints[v].x = proj_point->me[0][0] / proj_point->me[3][0];
-        projectedPoints[v].y = proj_point->me[0][1] / proj_point->me[3][0];
-        projectedPoints[v].depth = computeDepth(scene, proj_point->me[2][0]);
+        projectedPoints[v].x = proj_point->me[0][0]/ proj_point->me[3][0];
+        projectedPoints[v].y = proj_point->me[0][1]/ proj_point->me[3][0];
+        projectedPoints[v].depth = computeDepth(scene, proj_point->me[2][0] / proj_point->me[3][0]);
         projectedPoints[v].color = computeColor(current_tri.verts[v].color);
-        fprintf(stderr, "Point in modelview coords: %f %f %f\n", current_tri.verts[v].x, current_tri.verts[v].y, current_tri.verts[v].z);
+        fprintf(stderr, "Point in modelview coords: %f %f %f %f\n", current_tri.verts[v].x, current_tri.verts[v].y, current_tri.verts[v].z, current_tri.verts[v].t);
         fprintf(stderr, "Point after transforms: %f %f %f %f\n", proj_point->me[0][0], proj_point->me[1][0], proj_point->me[2][0], proj_point->me[3][0]);
         fprintf(stderr, "Point projected to: %f %f\n", projectedPoints[v].x, projectedPoints[v].y); 
-        fprintf(stderr, "Depth and color: %d %x\n", projectedPoints[v].depth, projectedPoints[v].color);
       }
       projectedTri->v1 = projectedPoints[0];
       projectedTri->v2 = projectedPoints[1];
@@ -73,16 +80,15 @@ triangle2d_t* scene_compute_tris_to_rasterize(scene_t *scene) {
 
 color_t computeColor(fcolor_t fcolor) {
   color_t col;
-  fprintf(stderr, "Computing color: (%f, %f, %f)\n", fcolor.r, fcolor.g, fcolor.b);
   int r = floor(255 * fcolor.r);
   int g = floor(255 * fcolor.g);
   int b = floor(255 * fcolor.b);
-  fprintf(stderr, "To integer: (%d, %d, %d)\n", r,g,b);
   col = (r << 16) + (g << 8) + b;
-  fprintf(stderr, "Hex value: %x\n", col);
   return col;
 }
 
 unsigned int computeDepth(scene_t *scene, float depth) {
-  return depth/100.0f * INT_MAX; // TODO implement
+  fprintf(stderr, "Depth, near, far = %f, %f, %f\n", depth, scene->near, scene->far);
+  fprintf(stderr, "Depth value: %u\n", (unsigned int)((depth - scene->near)/(scene->far - scene->near) * UINT_MAX));
+  return (depth - scene->near)/(scene->far - scene->near) * UINT_MAX;
 }
