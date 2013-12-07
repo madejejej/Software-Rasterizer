@@ -63,6 +63,8 @@ void rasterize(bitmap_t *bmp, triangle2d_t *triangles, int n) {
     int x, y;
     for(y=ymin; y<=ymax; y++) {
       for(x=xmin; x<=xmax; x++) {
+        if(x < 0 || x >= bmp->w || y < 0 || y >= bmp->h)
+          continue;
         float alpha = f12(x,y)/f_alpha;
         float beta = f20(x,y)/f_beta;
         float gamma = f01(x,y)/f_gamma;
