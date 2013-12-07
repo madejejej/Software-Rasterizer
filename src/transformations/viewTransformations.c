@@ -2,6 +2,7 @@
 #include "stdio.h"
 #include "../matrix/matrix.h"
 #include "viewTransformations.h"
+#include "../vec.h"
 
 MAT* getViewportTransformation(float nx,float ny) {
     /*MAT* canVector = m_get(4,1);
@@ -38,17 +39,21 @@ MAT* getOrthographicProjection(float l,float r,float b,float t,float n,float f){
     return transMat;
 }
 
-MAT* getCameraProjection(float xe,float ye,float ze){
-    MAT* tmp = m_get(4,4);
-    m_zero(tmp);
-    tmp->me[0][0] = 1;
-    tmp->me[1][1] = 1;
-    tmp->me[2][2] = 1;
-    tmp->me[3][3] = 1;
-    tmp->me[0][3] = -xe;
-    tmp->me[1][3] = -ye;
-    tmp->me[2][3] = -ze;
-    return tmp;
+MAT* lookAt(vec3_t eye, vec3_t center, vec3_t up) {
+    vec3_t w = v3_normalize( v3_sub(eye, center) ); 
+    vec3_t u = v3_cross( up, w );
+    u = v3_normalize(u);
+    vec3_t v = v3_cross(w, u);
+
+    vec3_t t = v3_init( v3_dot(u,eye), v3_dot(v, eye), v3_dot(w, eye) );
+
+    MAT* mat = m_get(4,4);
+    m_zero(mat);
+    mat->me[0][0] = u.x; mat->me[0][1] = u.y; mat->me[0][2] = u.z; mat->me[0][3] = -t.x;
+    mat->me[1][0] = v.x; mat->me[1][1] = v.y; mat->me[1][2] = v.z; mat->me[1][3] = -t.y;
+    mat->me[2][0] = w.x; mat->me[2][1] = w.y; mat->me[2][2] = w.z; mat->me[2][3] = -t.z;
+    mat->me[3][3] = 1;
+    return mat;
 }
 
 MAT* getPerspectiveProjection(float n, float r, float l, float t, float b, float f){
