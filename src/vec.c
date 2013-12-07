@@ -41,3 +41,9 @@ vec3_t v3_normalize(vec3_t v) {
   result.z = v.z / length;
   return result;
 }
+
+vec3_t v3_up(vec3_t up, vec3_t zvec) {
+  vec3_t x = v3_cross(up, zvec);
+  vec3_t y = v3_cross(zvec, x);
+  return v3_normalize(y);
+}
