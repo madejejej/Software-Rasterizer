@@ -17,6 +17,7 @@ typedef struct {
   camera_t *camera;
   MAT *M_viewport;
   MAT *M_proj;
+  MAT *M_cam;
   int total_tris;
   float near;
   float far;
